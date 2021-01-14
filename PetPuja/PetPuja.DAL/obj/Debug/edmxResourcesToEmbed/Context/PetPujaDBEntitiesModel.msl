@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PetPujaDBModelStoreContainer" CdmEntityContainer="PetPujaDBEntities">
+    <EntitySetMapping Name="Addresses">
+      <EntityTypeMapping TypeName="PetPujaDBModel.Address">
+        <MappingFragment StoreEntitySet="Address">
+          <ScalarProperty Name="addressID" ColumnName="addressID" />
+          <ScalarProperty Name="houseNo" ColumnName="houseNo" />
+          <ScalarProperty Name="street1" ColumnName="street1" />
+          <ScalarProperty Name="street2" ColumnName="street2" />
+          <ScalarProperty Name="locality" ColumnName="locality" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="zipcode" ColumnName="zipcode" />
+          <ScalarProperty Name="stateName" ColumnName="stateName" />
+          <ScalarProperty Name="country" ColumnName="country" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="PetPujaDBModel.Admin">
+        <MappingFragment StoreEntitySet="Admin">
+          <ScalarProperty Name="adminID" ColumnName="adminID" />
+          <ScalarProperty Name="adminName" ColumnName="adminName" />
+          <ScalarProperty Name="adminEmail" ColumnName="adminEmail" />
+          <ScalarProperty Name="adminAddress" ColumnName="adminAddress" />
+          <ScalarProperty Name="adminUsername" ColumnName="adminUsername" />
+          <ScalarProperty Name="adminPassword" ColumnName="adminPassword" />
+          <ScalarProperty Name="roleID" ColumnName="roleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bookings">
+      <EntityTypeMapping TypeName="PetPujaDBModel.Booking">
+        <MappingFragment StoreEntitySet="Booking">
+          <ScalarProperty Name="bookingID" ColumnName="bookingID" />
+          <ScalarProperty Name="ordersID" ColumnName="ordersID" />
+          <ScalarProperty Name="menuID" ColumnName="menuID" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contacts">
+      <EntityTypeMapping TypeName="PetPujaDBModel.Contact">
+        <MappingFragment StoreEntitySet="Contact">
+          <ScalarProperty Name="contactID" ColumnName="contactID" />
+          <ScalarProperty Name="customerID" ColumnName="customerID" />
+          <ScalarProperty Name="tiffinProviderID" ColumnName="tiffinProviderID" />
+          <ScalarProperty Name="deliveryBoyID" ColumnName="deliveryBoyID" />
+          <ScalarProperty Name="contact_no" ColumnName="contact_no" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="PetPujaDBModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="customerID" ColumnName="customerID" />
+          <ScalarProperty Name="customerName" ColumnName="customerName" />
+          <ScalarProperty Name="customerEmail" ColumnName="customerEmail" />
+          <ScalarProperty Name="addressID" ColumnName="addressID" />
+          <ScalarProperty Name="customerUsername" ColumnName="customerUsername" />
+          <ScalarProperty Name="customerPassword" ColumnName="customerPassword" />
+          <ScalarProperty Name="statusID" ColumnName="statusID" />
+          <ScalarProperty Name="roleID" ColumnName="roleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeliveryBoys">
+      <EntityTypeMapping TypeName="PetPujaDBModel.DeliveryBoy">
+        <MappingFragment StoreEntitySet="DeliveryBoy">
+          <ScalarProperty Name="deliveryBoyID" ColumnName="deliveryBoyID" />
+          <ScalarProperty Name="deliveryBoyName" ColumnName="deliveryBoyName" />
+          <ScalarProperty Name="deliveryBoyEmail" ColumnName="deliveryBoyEmail" />
+          <ScalarProperty Name="addressID" ColumnName="addressID" />
+          <ScalarProperty Name="deliveryBoyUsername" ColumnName="deliveryBoyUsername" />
+          <ScalarProperty Name="deliveryBoyPassword" ColumnName="deliveryBoyPassword" />
+          <ScalarProperty Name="statusID" ColumnName="statusID" />
+          <ScalarProperty Name="roleID" ColumnName="roleID" />
+          <ScalarProperty Name="deliveryBoyAvailability" ColumnName="deliveryBoyAvailability" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeliveryBoyFeedbacks">
+      <EntityTypeMapping TypeName="PetPujaDBModel.DeliveryBoyFeedback">
+        <MappingFragment StoreEntitySet="DeliveryBoyFeedback">
+          <ScalarProperty Name="feedbackID" ColumnName="feedbackID" />
+          <ScalarProperty Name="deliveryBoyID" ColumnName="deliveryBoyID" />
+          <ScalarProperty Name="customerID" ColumnName="customerID" />
+          <ScalarProperty Name="rating" ColumnName="rating" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
+          <ScalarProperty Name="ordersID" ColumnName="ordersID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Menus">
+      <EntityTypeMapping TypeName="PetPujaDBModel.Menu">
+        <MappingFragment StoreEntitySet="Menu">
+          <ScalarProperty Name="menuID" ColumnName="menuID" />
+          <ScalarProperty Name="tiffinProviderID" ColumnName="tiffinProviderID" />
+          <ScalarProperty Name="menuDescription" ColumnName="menuDescription" />
+          <ScalarProperty Name="menuName" ColumnName="menuName" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="menuImage" ColumnName="menuImage" />
+          <ScalarProperty Name="category" ColumnName="category" />
+          <ScalarProperty Name="statusID" ColumnName="statusID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="PetPujaDBModel.Order">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="ordersID" ColumnName="ordersID" />
+          <ScalarProperty Name="tiffinProviderID" ColumnName="tiffinProviderID" />
+          <ScalarProperty Name="customerID" ColumnName="customerID" />
+          <ScalarProperty Name="deliveryBoyID" ColumnName="deliveryBoyID" />
+          <ScalarProperty Name="statusID" ColumnName="statusID" />
+          <ScalarProperty Name="orderDateTime" ColumnName="orderDateTime" />
+          <ScalarProperty Name="deliveryDateTime" ColumnName="deliveryDateTime" />
+          <ScalarProperty Name="addressID" ColumnName="addressID" />
+          <ScalarProperty Name="paymentID" ColumnName="paymentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Payments">
+      <EntityTypeMapping TypeName="PetPujaDBModel.Payment">
+        <MappingFragment StoreEntitySet="Payment">
+          <ScalarProperty Name="paymentID" ColumnName="paymentID" />
+          <ScalarProperty Name="paymentDate" ColumnName="paymentDate" />
+          <ScalarProperty Name="billingAmount" ColumnName="billingAmount" />
+          <ScalarProperty Name="transcationID" ColumnName="transcationID" />
+          <ScalarProperty Name="statusID" ColumnName="statusID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoleTables">
+      <EntityTypeMapping TypeName="PetPujaDBModel.RoleTable">
+        <MappingFragment StoreEntitySet="RoleTable">
+          <ScalarProperty Name="roleID" ColumnName="roleID" />
+          <ScalarProperty Name="roleName" ColumnName="roleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StatusTables">
+      <EntityTypeMapping TypeName="PetPujaDBModel.StatusTable">
+        <MappingFragment StoreEntitySet="StatusTable">
+          <ScalarProperty Name="statusID" ColumnName="statusID" />
+          <ScalarProperty Name="statusName" ColumnName="statusName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiffinFeedbacks">
+      <EntityTypeMapping TypeName="PetPujaDBModel.TiffinFeedback">
+        <MappingFragment StoreEntitySet="TiffinFeedback">
+          <ScalarProperty Name="feedbackID" ColumnName="feedbackID" />
+          <ScalarProperty Name="menuID" ColumnName="menuID" />
+          <ScalarProperty Name="customerID" ColumnName="customerID" />
+          <ScalarProperty Name="tiffinProviderID" ColumnName="tiffinProviderID" />
+          <ScalarProperty Name="rating" ColumnName="rating" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
+          <ScalarProperty Name="ordersID" ColumnName="ordersID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiffinProviders">
+      <EntityTypeMapping TypeName="PetPujaDBModel.TiffinProvider">
+        <MappingFragment StoreEntitySet="TiffinProvider">
+          <ScalarProperty Name="tiffinProviderID" ColumnName="tiffinProviderID" />
+          <ScalarProperty Name="tiffinProviderName" ColumnName="tiffinProviderName" />
+          <ScalarProperty Name="tiffinProviderEmail" ColumnName="tiffinProviderEmail" />
+          <ScalarProperty Name="restaurantName" ColumnName="restaurantName" />
+          <ScalarProperty Name="addressID" ColumnName="addressID" />
+          <ScalarProperty Name="tiffinProviderUsername" ColumnName="tiffinProviderUsername" />
+          <ScalarProperty Name="tiffinProviderPassword" ColumnName="tiffinProviderPassword" />
+          <ScalarProperty Name="statusID" ColumnName="statusID" />
+          <ScalarProperty Name="roleID" ColumnName="roleID" />
+          <ScalarProperty Name="tiffinProviderImage" ColumnName="tiffinProviderImage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

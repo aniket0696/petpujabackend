@@ -1,0 +1,676 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PetPujaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="addressID" />
+    </Key>
+    <Property Name="addressID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="houseNo" Type="int" />
+    <Property Name="street1" Type="varchar" MaxLength="50" />
+    <Property Name="street2" Type="varchar" MaxLength="50" />
+    <Property Name="locality" Type="varchar" MaxLength="50" />
+    <Property Name="city" Type="varchar" MaxLength="50" />
+    <Property Name="zipcode" Type="int" />
+    <Property Name="state" Type="varchar" MaxLength="50" />
+    <Property Name="country" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="adminID" />
+    </Key>
+    <Property Name="adminID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="adminName" Type="varchar" MaxLength="50" />
+    <Property Name="adminEmail" Type="varchar" MaxLength="50" />
+    <Property Name="adminAddress" Type="varchar(max)" />
+    <Property Name="adminUsername" Type="varchar" MaxLength="50" />
+    <Property Name="adminPassword" Type="varchar" MaxLength="50" />
+    <Property Name="roleID" Type="int" />
+  </EntityType>
+  <EntityType Name="Booking">
+    <Key>
+      <PropertyRef Name="bookingID" />
+    </Key>
+    <Property Name="bookingID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ordersID" Type="bigint" />
+    <Property Name="menuID" Type="bigint" />
+    <Property Name="quantity" Type="int" />
+  </EntityType>
+  <EntityType Name="Contact">
+    <Key>
+      <PropertyRef Name="contactID" />
+    </Key>
+    <Property Name="contactID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="customerID" Type="bigint" />
+    <Property Name="tiffinProviderID" Type="bigint" />
+    <Property Name="deliveryBoyID" Type="bigint" />
+    <Property Name="contact_no" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="customerID" />
+    </Key>
+    <Property Name="customerID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="customerName" Type="varchar" MaxLength="50" />
+    <Property Name="customerEmail" Type="varchar" MaxLength="50" />
+    <Property Name="addressID" Type="bigint" />
+    <Property Name="customerUsername" Type="varchar" MaxLength="50" />
+    <Property Name="customerPassword" Type="varchar" MaxLength="50" />
+    <Property Name="statusID" Type="int" />
+    <Property Name="roleID" Type="int" />
+  </EntityType>
+  <EntityType Name="DeliveryBoy">
+    <Key>
+      <PropertyRef Name="deliveryBoyID" />
+    </Key>
+    <Property Name="deliveryBoyID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="deliveryBoyName" Type="varchar" MaxLength="50" />
+    <Property Name="deliveryBoyEmail" Type="varchar" MaxLength="50" />
+    <Property Name="addressID" Type="bigint" />
+    <Property Name="deliveryBoyUsername" Type="varchar" MaxLength="50" />
+    <Property Name="deliveryBoyPassword" Type="varchar" MaxLength="50" />
+    <Property Name="statusID" Type="int" />
+    <Property Name="roleID" Type="int" />
+    <Property Name="deliveryBoyAvailability" Type="int" />
+  </EntityType>
+  <EntityType Name="DeliveryBoyFeedback">
+    <Key>
+      <PropertyRef Name="feedbackID" />
+    </Key>
+    <Property Name="feedbackID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="deliveryBoyID" Type="bigint" />
+    <Property Name="customerID" Type="bigint" />
+    <Property Name="rating" Type="int" />
+    <Property Name="comment" Type="varchar(max)" />
+    <Property Name="ordersID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="menuID" />
+    </Key>
+    <Property Name="menuID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tiffinProviderID" Type="bigint" />
+    <Property Name="menuDescription" Type="varchar(max)" />
+    <Property Name="menuName" Type="varchar" MaxLength="50" />
+    <Property Name="price" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="menuImage" Type="varchar(max)" />
+    <Property Name="category" Type="varchar" MaxLength="30" />
+    <Property Name="statusID" Type="int" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="ordersID" />
+    </Key>
+    <Property Name="ordersID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tiffinProviderID" Type="bigint" />
+    <Property Name="customerID" Type="bigint" />
+    <Property Name="deliveryBoyID" Type="bigint" />
+    <Property Name="statusID" Type="int" />
+    <Property Name="orderDateTime" Type="datetime" />
+    <Property Name="deliveryDateTime" Type="datetime" />
+    <Property Name="addressID" Type="bigint" />
+    <Property Name="paymentID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="paymentID" />
+    </Key>
+    <Property Name="paymentID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="paymentDate" Type="datetime" />
+    <Property Name="billingAmount" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="transcationID" Type="bigint" />
+    <Property Name="statusID" Type="int" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="roleID" />
+    </Key>
+    <Property Name="roleID" Type="int" Nullable="false" />
+    <Property Name="role" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="statusID" />
+    </Key>
+    <Property Name="statusID" Type="int" Nullable="false" />
+    <Property Name="status" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="TiffinFeedback">
+    <Key>
+      <PropertyRef Name="feedbackID" />
+    </Key>
+    <Property Name="feedbackID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="menuID" Type="bigint" />
+    <Property Name="customerID" Type="bigint" />
+    <Property Name="tiffinProviderID" Type="bigint" />
+    <Property Name="rating" Type="int" />
+    <Property Name="comment" Type="varchar(max)" />
+    <Property Name="ordersID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="TiffinProvider">
+    <Key>
+      <PropertyRef Name="tiffinProviderID" />
+    </Key>
+    <Property Name="tiffinProviderID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tiffinProviderName" Type="varchar" MaxLength="50" />
+    <Property Name="tiffinProviderEmail" Type="varchar" MaxLength="50" />
+    <Property Name="restaurantName" Type="varchar" MaxLength="50" />
+    <Property Name="addressID" Type="bigint" />
+    <Property Name="tiffinProviderUsername" Type="varchar" MaxLength="50" />
+    <Property Name="tiffinProviderPassword" Type="varchar" MaxLength="50" />
+    <Property Name="statusID" Type="int" />
+    <Property Name="roleID" Type="int" />
+    <Property Name="tiffinProviderImage" Type="varchar(max)" />
+  </EntityType>
+  <Association Name="FK__Admin__roleID__15502E78">
+    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="roleID" />
+      </Principal>
+      <Dependent Role="Admin">
+        <PropertyRef Name="roleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Booking__menuID__3A81B327">
+    <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="menuID" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="menuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Booking__ordersI__398D8EEE">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="ordersID" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="ordersID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Contact__custome__47DBAE45">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Contact" Type="Self.Contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="customerID" />
+      </Principal>
+      <Dependent Role="Contact">
+        <PropertyRef Name="customerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Contact__deliver__49C3F6B7">
+    <End Role="DeliveryBoy" Type="Self.DeliveryBoy" Multiplicity="0..1" />
+    <End Role="Contact" Type="Self.Contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeliveryBoy">
+        <PropertyRef Name="deliveryBoyID" />
+      </Principal>
+      <Dependent Role="Contact">
+        <PropertyRef Name="deliveryBoyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Contact__tiffinP__48CFD27E">
+    <End Role="TiffinProvider" Type="Self.TiffinProvider" Multiplicity="0..1" />
+    <End Role="Contact" Type="Self.Contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiffinProvider">
+        <PropertyRef Name="tiffinProviderID" />
+      </Principal>
+      <Dependent Role="Contact">
+        <PropertyRef Name="tiffinProviderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Customer__addres__1CF15040">
+    <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="addressID" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="addressID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Customer__roleID__1FCDBCEB">
+    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="roleID" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="roleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Customer__status__1DE57479">
+    <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="statusID" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="statusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DeliveryB__addre__286302EC">
+    <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+    <End Role="DeliveryBoy" Type="Self.DeliveryBoy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="addressID" />
+      </Principal>
+      <Dependent Role="DeliveryBoy">
+        <PropertyRef Name="addressID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DeliveryB__custo__440B1D61">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="DeliveryBoyFeedback" Type="Self.DeliveryBoyFeedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="customerID" />
+      </Principal>
+      <Dependent Role="DeliveryBoyFeedback">
+        <PropertyRef Name="customerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DeliveryB__deliv__4316F928">
+    <End Role="DeliveryBoy" Type="Self.DeliveryBoy" Multiplicity="0..1" />
+    <End Role="DeliveryBoyFeedback" Type="Self.DeliveryBoyFeedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeliveryBoy">
+        <PropertyRef Name="deliveryBoyID" />
+      </Principal>
+      <Dependent Role="DeliveryBoyFeedback">
+        <PropertyRef Name="deliveryBoyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DeliveryB__order__44FF419A">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+    <End Role="DeliveryBoyFeedback" Type="Self.DeliveryBoyFeedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="ordersID" />
+      </Principal>
+      <Dependent Role="DeliveryBoyFeedback">
+        <PropertyRef Name="ordersID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DeliveryB__roleI__2B3F6F97">
+    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="DeliveryBoy" Type="Self.DeliveryBoy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="roleID" />
+      </Principal>
+      <Dependent Role="DeliveryBoy">
+        <PropertyRef Name="roleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DeliveryB__statu__29572725">
+    <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+    <End Role="DeliveryBoy" Type="Self.DeliveryBoy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="statusID" />
+      </Principal>
+      <Dependent Role="DeliveryBoy">
+        <PropertyRef Name="statusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Menu__statusID__36B12243">
+    <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+    <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="statusID" />
+      </Principal>
+      <Dependent Role="Menu">
+        <PropertyRef Name="statusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Menu__tiffinProv__35BCFE0A">
+    <End Role="TiffinProvider" Type="Self.TiffinProvider" Multiplicity="0..1" />
+    <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiffinProvider">
+        <PropertyRef Name="tiffinProviderID" />
+      </Principal>
+      <Dependent Role="Menu">
+        <PropertyRef Name="tiffinProviderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__addressI__31EC6D26">
+    <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="addressID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="addressID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__customer__2F10007B">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="customerID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="customerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__delivery__300424B4">
+    <End Role="DeliveryBoy" Type="Self.DeliveryBoy" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeliveryBoy">
+        <PropertyRef Name="deliveryBoyID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="deliveryBoyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__paymentI__32E0915F">
+    <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payment">
+        <PropertyRef Name="paymentID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="paymentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__statusID__30F848ED">
+    <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="statusID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="statusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__tiffinPr__2E1BDC42">
+    <End Role="TiffinProvider" Type="Self.TiffinProvider" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiffinProvider">
+        <PropertyRef Name="tiffinProviderID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="tiffinProviderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Payment__statusI__182C9B23">
+    <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="statusID" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="statusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TiffinFee__custo__3E52440B">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="TiffinFeedback" Type="Self.TiffinFeedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="customerID" />
+      </Principal>
+      <Dependent Role="TiffinFeedback">
+        <PropertyRef Name="customerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TiffinFee__menuI__3D5E1FD2">
+    <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+    <End Role="TiffinFeedback" Type="Self.TiffinFeedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="menuID" />
+      </Principal>
+      <Dependent Role="TiffinFeedback">
+        <PropertyRef Name="menuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TiffinFee__order__403A8C7D">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+    <End Role="TiffinFeedback" Type="Self.TiffinFeedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="ordersID" />
+      </Principal>
+      <Dependent Role="TiffinFeedback">
+        <PropertyRef Name="ordersID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TiffinFee__tiffi__3F466844">
+    <End Role="TiffinProvider" Type="Self.TiffinProvider" Multiplicity="0..1" />
+    <End Role="TiffinFeedback" Type="Self.TiffinFeedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiffinProvider">
+        <PropertyRef Name="tiffinProviderID" />
+      </Principal>
+      <Dependent Role="TiffinFeedback">
+        <PropertyRef Name="tiffinProviderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TiffinPro__addre__22AA2996">
+    <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+    <End Role="TiffinProvider" Type="Self.TiffinProvider" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="addressID" />
+      </Principal>
+      <Dependent Role="TiffinProvider">
+        <PropertyRef Name="addressID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TiffinPro__roleI__25869641">
+    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="TiffinProvider" Type="Self.TiffinProvider" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="roleID" />
+      </Principal>
+      <Dependent Role="TiffinProvider">
+        <PropertyRef Name="roleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TiffinPro__statu__239E4DCF">
+    <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+    <End Role="TiffinProvider" Type="Self.TiffinProvider" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="statusID" />
+      </Principal>
+      <Dependent Role="TiffinProvider">
+        <PropertyRef Name="statusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PetPujaDBModelStoreContainer">
+    <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Booking" EntityType="Self.Booking" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeliveryBoy" EntityType="Self.DeliveryBoy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeliveryBoyFeedback" EntityType="Self.DeliveryBoyFeedback" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TiffinFeedback" EntityType="Self.TiffinFeedback" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TiffinProvider" EntityType="Self.TiffinProvider" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Admin__roleID__15502E78" Association="Self.FK__Admin__roleID__15502E78">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Admin" EntitySet="Admin" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Booking__menuID__3A81B327" Association="Self.FK__Booking__menuID__3A81B327">
+      <End Role="Menu" EntitySet="Menu" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Booking__ordersI__398D8EEE" Association="Self.FK__Booking__ordersI__398D8EEE">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Contact__custome__47DBAE45" Association="Self.FK__Contact__custome__47DBAE45">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Contact" EntitySet="Contact" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Contact__deliver__49C3F6B7" Association="Self.FK__Contact__deliver__49C3F6B7">
+      <End Role="DeliveryBoy" EntitySet="DeliveryBoy" />
+      <End Role="Contact" EntitySet="Contact" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Contact__tiffinP__48CFD27E" Association="Self.FK__Contact__tiffinP__48CFD27E">
+      <End Role="TiffinProvider" EntitySet="TiffinProvider" />
+      <End Role="Contact" EntitySet="Contact" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Customer__addres__1CF15040" Association="Self.FK__Customer__addres__1CF15040">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Customer__roleID__1FCDBCEB" Association="Self.FK__Customer__roleID__1FCDBCEB">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Customer__status__1DE57479" Association="Self.FK__Customer__status__1DE57479">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DeliveryB__addre__286302EC" Association="Self.FK__DeliveryB__addre__286302EC">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="DeliveryBoy" EntitySet="DeliveryBoy" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DeliveryB__custo__440B1D61" Association="Self.FK__DeliveryB__custo__440B1D61">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="DeliveryBoyFeedback" EntitySet="DeliveryBoyFeedback" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DeliveryB__deliv__4316F928" Association="Self.FK__DeliveryB__deliv__4316F928">
+      <End Role="DeliveryBoy" EntitySet="DeliveryBoy" />
+      <End Role="DeliveryBoyFeedback" EntitySet="DeliveryBoyFeedback" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DeliveryB__order__44FF419A" Association="Self.FK__DeliveryB__order__44FF419A">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="DeliveryBoyFeedback" EntitySet="DeliveryBoyFeedback" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DeliveryB__roleI__2B3F6F97" Association="Self.FK__DeliveryB__roleI__2B3F6F97">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="DeliveryBoy" EntitySet="DeliveryBoy" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DeliveryB__statu__29572725" Association="Self.FK__DeliveryB__statu__29572725">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="DeliveryBoy" EntitySet="DeliveryBoy" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Menu__statusID__36B12243" Association="Self.FK__Menu__statusID__36B12243">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Menu" EntitySet="Menu" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Menu__tiffinProv__35BCFE0A" Association="Self.FK__Menu__tiffinProv__35BCFE0A">
+      <End Role="TiffinProvider" EntitySet="TiffinProvider" />
+      <End Role="Menu" EntitySet="Menu" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__addressI__31EC6D26" Association="Self.FK__Orders__addressI__31EC6D26">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__customer__2F10007B" Association="Self.FK__Orders__customer__2F10007B">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__delivery__300424B4" Association="Self.FK__Orders__delivery__300424B4">
+      <End Role="DeliveryBoy" EntitySet="DeliveryBoy" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__paymentI__32E0915F" Association="Self.FK__Orders__paymentI__32E0915F">
+      <End Role="Payment" EntitySet="Payment" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__statusID__30F848ED" Association="Self.FK__Orders__statusID__30F848ED">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__tiffinPr__2E1BDC42" Association="Self.FK__Orders__tiffinPr__2E1BDC42">
+      <End Role="TiffinProvider" EntitySet="TiffinProvider" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Payment__statusI__182C9B23" Association="Self.FK__Payment__statusI__182C9B23">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Payment" EntitySet="Payment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TiffinFee__custo__3E52440B" Association="Self.FK__TiffinFee__custo__3E52440B">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="TiffinFeedback" EntitySet="TiffinFeedback" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TiffinFee__menuI__3D5E1FD2" Association="Self.FK__TiffinFee__menuI__3D5E1FD2">
+      <End Role="Menu" EntitySet="Menu" />
+      <End Role="TiffinFeedback" EntitySet="TiffinFeedback" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TiffinFee__order__403A8C7D" Association="Self.FK__TiffinFee__order__403A8C7D">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="TiffinFeedback" EntitySet="TiffinFeedback" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TiffinFee__tiffi__3F466844" Association="Self.FK__TiffinFee__tiffi__3F466844">
+      <End Role="TiffinProvider" EntitySet="TiffinProvider" />
+      <End Role="TiffinFeedback" EntitySet="TiffinFeedback" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TiffinPro__addre__22AA2996" Association="Self.FK__TiffinPro__addre__22AA2996">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="TiffinProvider" EntitySet="TiffinProvider" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TiffinPro__roleI__25869641" Association="Self.FK__TiffinPro__roleI__25869641">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="TiffinProvider" EntitySet="TiffinProvider" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TiffinPro__statu__239E4DCF" Association="Self.FK__TiffinPro__statu__239E4DCF">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="TiffinProvider" EntitySet="TiffinProvider" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

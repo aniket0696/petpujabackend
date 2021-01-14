@@ -1,0 +1,6 @@
+C:\Users\aniketshinde\source\repos\Major_project_PetPuja\PetPuja\PetPuja.Models\bin\Debug\PetPuja.Models.dll
+C:\Users\aniketshinde\source\repos\Major_project_PetPuja\PetPuja\PetPuja.Models\bin\Debug\PetPuja.Models.pdb
+C:\Users\aniketshinde\source\repos\Major_project_PetPuja\PetPuja\PetPuja.Models\obj\Debug\PetPuja.Models.csproj.CoreCompileInputs.cache
+C:\Users\aniketshinde\source\repos\Major_project_PetPuja\PetPuja\PetPuja.Models\obj\Debug\PetPuja.Models.dll
+C:\Users\aniketshinde\source\repos\Major_project_PetPuja\PetPuja\PetPuja.Models\obj\Debug\PetPuja.Models.pdb
+C:\Users\aniketshinde\source\repos\Major_project_PetPuja\PetPuja\PetPuja.Models\obj\Debug\PetPuja.Models.csprojAssemblyReference.cache
