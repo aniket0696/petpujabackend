@@ -1,0 +1,301 @@
+--create database PetPujaDB
+--use PetPujaDB
+--drop database PetPujaDB
+
+
+create table StatusTable
+(
+	statusID int primary key,
+	statusName varchar(30)
+)
+
+insert into StatusTable values 
+(0,'pending'),
+(1,'registered'),
+(2,'deregistered'),
+(3,'decline'),
+(4,'paid'),
+(5,'unpaid'),
+(6,'pickedup'),
+(7,'delivered'),
+(8,'approved')
+
+
+select * from StatusTable
+
+create table RoleTable
+(
+	roleID int primary key,
+	roleName varchar(30)
+)
+insert into RoleTable values 
+(0,'admin'),
+(1,'customer'),
+(2,'deliveryboy'),
+(3,'tiffinprovider')
+
+select * from RoleTable
+
+create table Admin
+(
+	adminID bigint primary key identity(10000000000000,1),
+	adminName varchar(50),
+	adminEmail varchar(50),
+	adminAddress varchar(max),
+	adminUsername varchar(50),
+	adminPassword varchar(50),
+	roleID int default 0 foreign key references RoleTable(roleID)
+)
+
+create table Payment
+(
+	paymentID bigint primary key identity(20000000,1),
+	paymentDate datetime,
+	billingAmount decimal,
+	transcationID bigint,
+	statusID int foreign key references StatusTable(statusID)	
+)
+
+create table Address
+(
+	addressID bigint primary key identity(14000000000000,1),
+	houseNo int,
+	street1 varchar(50),
+	street2 varchar(50),
+	locality varchar(50),
+	city varchar(50),
+	zipcode int,
+	stateName varchar(50),
+	country varchar(50)
+)
+--state changed to stateName
+create table Customer
+(
+	customerID bigint primary key identity(40000000000000,1),
+	customerName varchar(50),
+	customerEmail varchar(50),
+	addressID bigint foreign key references Address(addressID),
+	customerUsername varchar(50),
+	customerPassword varchar(50),
+	statusID int foreign key references StatusTable(statusID),
+	roleID int default 1 foreign key references RoleTable(roleID)
+	
+)
+
+create table TiffinProvider
+(
+	tiffinProviderID bigint primary key identity(50000000000000,1),
+	tiffinProviderName varchar(50),
+	tiffinProviderEmail varchar(50),
+	restaurantName varchar(50),
+	addressID bigint foreign key references Address(addressID),
+	tiffinProviderUsername varchar(50),
+	tiffinProviderPassword varchar(50),
+	statusID int foreign key references StatusTable(statusID),
+	roleID int default 3 foreign key references RoleTable(roleID),
+	tiffinProviderImage varchar(max)
+	
+)
+
+create table DeliveryBoy
+(
+	deliveryBoyID bigint primary key identity(60000000000000,1),
+	deliveryBoyName varchar(50),
+	deliveryBoyEmail varchar(50),
+	addressID bigint foreign key references Address(addressID),
+	deliveryBoyUsername varchar(50),
+	deliveryBoyPassword varchar(50),
+	statusID int foreign key references StatusTable(statusID),
+	roleID int default 2 foreign key references RoleTable(roleID),
+	deliveryBoyAvailability int
+)
+
+create table Orders
+(
+	ordersID bigint primary key identity(70000000000000,1),
+	tiffinProviderID bigint foreign key references TiffinProvider(tiffinProviderID),
+	customerID bigint foreign key references Customer(customerID),
+	deliveryBoyID bigint foreign key references DeliveryBoy(deliveryBoyID ),
+	statusID int foreign key references StatusTable(statusID),
+	orderDateTime datetime,
+	deliveryDateTime datetime,
+	addressID bigint foreign key references Address(addressID),
+	paymentID bigint foreign key references Payment(paymentID),
+	
+)
+
+create table Menu
+(
+	menuID bigint primary key identity(80000000000000,1),
+	tiffinProviderID bigint foreign key references TiffinProvider(tiffinProviderID),
+	menuDescription varchar(max),
+	menuName varchar(50),
+	price decimal,
+	menuImage varchar(max),
+	category varchar(30),
+	statusID int foreign key references StatusTable(statusID),
+	
+)
+--check(menuStatus in ('Available','Unavailable'))
+
+
+create table Booking
+(
+	bookingID bigint primary key identity(90000000000000,1),
+	ordersID bigint foreign key references Orders(ordersID),
+	menuID bigint foreign key references Menu(menuID),
+	quantity int
+)
+
+create table TiffinFeedback
+(
+	feedbackID bigint primary key identity(11000000000000,1),
+	menuID bigint foreign key references Menu(menuID),
+	customerID bigint foreign key references Customer(customerID),
+	tiffinProviderID bigint foreign key references TiffinProvider(tiffinProviderID),
+	rating int,
+	comment varchar(max),
+	ordersID bigint foreign key references Orders(ordersID)	
+)
+
+create table DeliveryBoyFeedback
+(
+	feedbackID bigint primary key identity(12000000000000,1),
+	deliveryBoyID bigint foreign key references DeliveryBoy(deliveryBoyID ),
+	customerID bigint foreign key references Customer(customerID),
+	rating int,
+	comment varchar(max),
+	ordersID bigint foreign key references Orders(ordersID)
+)
+
+create table Contact
+(
+	contactID bigint primary key identity(13000000000000,1),
+	customerID bigint foreign key references Customer(customerID),
+	tiffinProviderID bigint foreign key references TiffinProvider(tiffinProviderID),
+	deliveryBoyID bigint foreign key references DeliveryBoy(deliveryBoyID ),
+	contact_no bigint not null
+)
+
+
+
+
+insert into Address values
+(221,'B street','scranton street','kansas','new york',400070,'new jersey','USA'),
+(4209, 'Hillcrest Lane','Linkin Crossroad','Anaheim','California',455689,'san jose','USA'),
+(4809, 'Late Avenue','harlem street','harlem','Oklahoma City',698562,'Oklahoma','USA'),
+(150, 'Smith Mountain Ln','john hopkins street','Sutton','West Virginia(WV)',26601,'Virginia','USA')
+select * from Address
+
+insert into Customer values
+('John Doe','johndoe@abc.com',14000000000000,'jd1234','jd1234',1,1),
+('Pam Beesley','pambeesley@xyz.com',14000000000001,'pb5678','pb5678',1,1),
+('Max Payne','maxpayne@pqr.com',14000000000002,'mp2607','mp2607',1,1),
+('Angela Smith','angelasmith@lmn.com',14000000000003,'as4356','as4356',1,1)
+select * from Customer
+ --delete from tbl_customer ----
+
+---- Make use of store procedures or functions ----
+
+insert into TiffinProvider values
+('tiffinProvider1','tiffinProvider1@gmail.com','varlkshmi',14000000000000,'tp1','tp1',1,3,'D:\person.png'),
+('tiffinProvider2','tiffinProvider2@gmail.com','chai point',14000000000002,'tp2','tp2',1,3,'D:\person.png'),
+('tiffinProvider3','tiffinProvider3@gmail.com','shah ghouse',14000000000001,'tp3','tp3',1,3,'D:\person.png'),
+('tiffinProvider4','tiffinProvider4@gmail.com','pakwaan',14000000000003,'tp4','tp4',1,3,'D:\person.png')
+select * from TiffinProvider
+
+insert into Menu values
+(50000000000000,'Grilled chicken, marinated in mild spices and yogurt.','Spicy Chicken Bowl',510.50,'D:\tiffin.jpg','nonveg',8),
+(50000000000001,'Meals served with a mini JUST bottled spring water.','Lentils and Rice',255.37,'D:\tiffin.jpg','veg',8),
+(50000000000002,'Marinated in hot spices, then slow cooked and finished with coconut milk.','Spicy Shrimp Bowl',756.21,'D:\tiffin.jpg','nonveg',8),
+(50000000000003,'Fresh made dessert with ground cardamom and sliced almonds.','Sweet Wheat Square',132.12,'D:\tiffin.jpg','veg',8)
+select * from Menu
+
+insert into Menu values
+(50000000000003,'Cubes of paneer butter fried &tossed in spicy sauce','Paneer 65',159,'paneer.jpg','veg',8),
+(50000000000003,'Shape may vary according to availability.','Eggless Chocolate Deluxe [900 grams]',850,'cake.jpg','veg',8),
+(50000000000003,'Kashmiri Pulao is a delicious rice preparation where rice is cooked in milk and is loaded with dry fruits and fruits. Saffron is added to it too which gives a very nice fragrance to this pulao.','Kashmiri Pulao',200,'pulao.jpg','veg',8),
+(50000000000003,'Whole wheat pita bread that stuffed with hummus, fresh tzatziki, pickled cucumber, carrot, and crumbled falafel that can be had as a quick snack.','Veg Shawarma',90,'Shawarma.jpg','veg',8),
+(50000000000003,'regular fried rice, schezwan fried rice is hot & spicy with bursting flavors of ginger, garlic, soya sauce & red chilli paste mixed with Chicken.','Chicken Schezwan Fried Rice',260,'Schezwan.jpg','nonveg',8),
+(50000000000003,'The main technique which differentiates mandi from other meat dishes is that the Chicken is cooked in the tandoor (taboon in Arabic), which is a special kind of oven which is usually a pit dug up in the ground and covered with clay all around its sides.','Special Mandi Chicken',500,'paneer.jpg','nonveg',8)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+insert into DeliveryBoy values
+('Purva','purva@cybage.com',14000000000002,'purva','purva',1,2,0),
+('Mayuresh','mayuresh@cybage.com',14000000000001,'mayuresh','mayuresh',1,2,0),
+('Raheem','Raheem@cybage.com',14000000000003,'raheem','raheem',1,2,0)
+select * from DeliveryBoy
+
+insert into Payment values
+('2-12-2020',10000,12345648,4),
+('1-1-2021',50000,12345678,4)
+select * from payment
+
+insert into Orders values
+(50000000000000,40000000000000,60000000000000,0,'1-1-2021','1-1-2021',14000000000000,20000000),
+(50000000000001,40000000000001,60000000000001,0,'12-13-2020','12-13-2020',14000000000003,20000001)
+select * from Orders
+
+insert into Booking values
+(70000000000001,80000000000001,2),
+(70000000000000,80000000000002,4)
+select * from Booking
+
+
+
+--insert into tbl_Orders values()
+--select * from tbl_Orders
+
+--insert into tbl_Booking values()
+--select * from tbl_booking
+
+--insert into tbl_Payment values()
+--select * from tbl_payment
+--select * from tbl_Admin
+
+select * from TiffinProvider;
+--select * from tbl_Address;
+
+select * from Menu;
+
+select * from Contact;
+----------extra data added by aniket
+
+insert into Contact (tiffinProviderID,contact_no) values
+(50000000000000,9856478545),
+(50000000000001,8756954525),
+(50000000000002,4741523698),
+(50000000000003,9856785236)
+select * from Address;
+
+
+
+insert into Menu values
+(50000000000000,'This is a rich and moist chocolate cake.','One Bowl Chocolate Cake',218.50,'D:\tiffin.jpg','veg',0),
+(50000000000001,'Meals served with a mini JUST bottled spring water.','Creamy Rice Pudding',46.37,'D:\tiffin.jpg','veg',0),
+(50000000000002,'Crispy rolls filled with tossed vegetables and served with home made spicy sauce.','Shanghai Veg Spring Roll',756.21,'D:\tiffin.jpg','veg',0),
+(50000000000003,'Corn flour coated crispy potatoes, tossed in hot & sour sauce.','Mr Chows Chilli Potatoes',132.12,'D:\tiffin.jpg','veg',0)
+
+insert into Menu values
+(50000000000000,'Boneless fried chicken cubes, tossed hot garlic sauce','Chicken in Mr Chows Garlic Sauce',95.50,'D:\tiffin.jpg','nonveg',3),
+(50000000000001,'Shredded vegetables in sweet & sour sauce, served with crispy fried noodles','American Chopsuey- veg',210.50,'D:\tiffin.jpg','nonveg',3),
+(50000000000002,'Shredded vegetables & sliced chicken in sweet & sour sauce, served with crispy ... more','American Chopsuey- chicken',140.50,'D:\tiffin.jpg','nonveg',3),
+(50000000000003,'Veg hakka noodles with a choice of any one chicken gravy','Hakka noodle bowl- Chicken',110.50,'D:\tiffin.jpg','nonveg',3)
+
